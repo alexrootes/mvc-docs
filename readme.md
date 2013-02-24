@@ -1,6 +1,6 @@
 # A simple documentation system for ASP.NET MVC
 
-mvc-doc is an attempt to build a simple to version, edit and deploy
+mvc-docs is a work in progress attempt to build a simple to version, edit and deploy
 documentation system for the ASP.NET MVC framework.
 
 ## Features
@@ -8,12 +8,14 @@ documentation system for the ASP.NET MVC framework.
 * Markdown support
 * Automatic index generation and document linking
 * Full-text search
-* Intelligent URLs
+* Pretty URLs
 * Multi-product support
+* Multi-version support
 * Theming
+* Access control
 * Minimal dependencies
-* Access control 
-* Future: User statistics and suggested pages
+* Simple deployment
+* Suggested pages
 
 ## Getting started
 
