@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Mvc;
 using MarkdownSharp;
+using mvc_docs.Models.Documents;
 
 namespace mvc_docs.Controllers
 {
@@ -18,8 +19,15 @@ namespace mvc_docs.Controllers
 		public ActionResult Index(string product, string language, string version)
 		{
 			// show TOC
+            var repo = FileHelper.GetRepositoryPath(product, language, version);
 
-			return View();
+		    IEnumerable<string> files;
+            using (var reader = new DocumentRepositoryReader(repo))
+            {
+                files = reader.GetMarkDownFiles();
+            }
+
+			return View(files);
 		}
 
 		[HttpGet]
@@ -70,7 +78,7 @@ namespace mvc_docs.Controllers
 					: value;
 
 				var docPath = nameToDocPath(name);
-				var href = Url.Action("Index", "Documents", new { product = "example", version = "latest", url = docPath });
+				var href = Url.Action("View", "Documents", new { product = "example", language = "en", version = "latest", url = docPath });
 
 				return string.Format(internalLinkTemplate, href, text);
 			};

@@ -5,79 +5,89 @@ using System.Web;
 
 namespace mvc_docs.Models.Documents
 {
-	public static class FileHelper
-	{
-		public static string GetRepositoryPath(string product, string language, string version)
-		{
-			return HttpContext.Current.Server.MapPath("~/docs/" + product + "/" + version);
-		}
+    public static class FileHelper
+    {
+        public static string GetRepositoryPath(string product, string language, string version)
+        {
+            return HttpContext.Current.Server.MapPath("~/App_Docs/" + product + "/" + language + "/" + version + "/");
+        }
+    }
 
-		public static string[] ListDocuments(string path)
-		{
-			return System.IO.Directory.GetFiles(path, "*.md");
-		}
-	}
+    public class DocumentRepositoryReader : IDisposable
+    {
+        private string Path { get; set; }
 
-	public class DocumentRepositoryReader : IDisposable
-	{
-		public DocumentRepositoryReader(string path)
-		{
-			// open a stateful view of the document directory
-		}
+        public DocumentRepositoryReader(string path)
+        {
+            // open a stateful view of the document directory
+            this.Path = path;
+        }
 
-		public void Dispose()
-		{
-			// throw away any open file handles
-		}
-	}
+        public IEnumerable<string> GetMarkDownFiles()
+        {
+            return System.IO.Directory.GetFiles(this.Path, "*.md")
+                .Select(System.IO.Path.GetFileName)
+                .Select(f => f.Replace("-", " ").Substring(0, f.Length - 3));
+        }
 
-	public class ViewModel
-	{
-		public FolderModel Folder { get; set; }
+        public IList<string> GetSubFolders()
+        {
+            return System.IO.Directory.GetDirectories(this.Path);
+        }
 
-		public string Name { get; set; }
-		public string Content { get; set; }
+        public void Dispose()
+        {
+            // throw away any open file handles
+        }
+    }
 
-		public ViewModel(string product, string language, string version, string name)
-		{
-			var repo = FileHelper.GetRepositoryPath(product, language, version);
+    public class ViewModel
+    {
+        public string[] MarkDownFiles { get; set; }
 
-			using (var reader = new DocumentRepositoryReader(repo))
-			{
-				
-			}
+        public string Name { get; set; }
+        public string Content { get; set; }
 
-			// need version picker
-			// need view > folder > file > sections
+        public ViewModel(string product, string language, string version, string name)
+        {
+            var repo = FileHelper.GetRepositoryPath(product, language, version);
 
-			//this.Content = document.Content;
-			//this.Name = document.Name;
+            using (var reader = new DocumentRepositoryReader(repo))
+            {
+                var s = reader.GetMarkDownFiles();
+            }
 
-			//this.Folder = new FolderModel(folder);
-		}
+            // need version picker
+            // need view > folder > file > sections
 
-		public class FolderModel
-		{
-			public IList<DocumentModel> Documents { get; set; }
-			public IList<FolderModel> Folders { get; set; }
+            //this.Content = document.Content;
+            //this.Name = document.Name;
 
-			public string Name { get; set; }
+            //this.Folder = new FolderModel(folder);
+        }
 
-			public FolderModel()
-			{
-				this.Documents = new List<DocumentModel>();
-				this.Folders = new List<FolderModel>();
+        public class FolderModel
+        {
+            public IList<DocumentModel> Documents { get; set; }
+            public IList<FolderModel> Folders { get; set; }
 
-				//this.Documents = folder.Documents
-				//	.Select(doc => new DocumentModel { Name = doc.Name })
-				//	.OrderBy(doc => doc.Name)
-				//	.ToList();
-			}
-		}
+            public string Name { get; set; }
 
-		public class DocumentModel
-		{
-			public string Name { get; set; }
-		}
-	}
+            public FolderModel()
+            {
+                this.Documents = new List<DocumentModel>();
+                this.Folders = new List<FolderModel>();
+
+                //this.Documents = folder.Documents
+                //	.Select(doc => new DocumentModel { Name = doc.Name })
+                //	.OrderBy(doc => doc.Name)
+                //	.ToList();
+            }
+        }
+
+        public class DocumentModel
+        {
+            public string Name { get; set; }
+        }
+    }
 }

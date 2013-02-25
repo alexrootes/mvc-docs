@@ -11,7 +11,12 @@
     <div id="doc-content">
         <div id="doc-body">
             <div class="markdown-body">
-				<a href="@Url.Action("View", new { product = "example", language = "en", version = "latest", url = "getting-started"})">Getting Started</a>
+                <ul>
+                    @foreach (var file in Model)
+                    {
+                        <li><a href="@Url.Action("View", new { product = "example", language = "en", version = "latest", url = ((string)file).Replace(" ", "-").ToLower() })">@file</a></li>
+                    }
+                </ul>
             </div>
         </div>
     </div>
