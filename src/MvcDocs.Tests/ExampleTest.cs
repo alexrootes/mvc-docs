@@ -5,7 +5,7 @@ using System.Text;
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace mvc_docs_tests
+namespace MvcDocs.Tests
 {
     [TestFixture]
     public class ExampleTest

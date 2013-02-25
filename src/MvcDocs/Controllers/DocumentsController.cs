@@ -6,12 +6,11 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Web.Mvc;
 using MarkdownSharp;
-using mvc_docs.Models.Documents;
+using MvcDocs.Models.Documents;
 
-namespace mvc_docs.Controllers
+namespace MvcDocs.Controllers
 {
 	public class DocumentsController : Controller
 	{

@@ -7,8 +7,8 @@
     <ProjectGuid>{FA72F8B2-ED3E-4F1E-81B2-7F864B57A068}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>mvc_docs_tests</RootNamespace>
-    <AssemblyName>mvc-docs-tests</AssemblyName>
+    <RootNamespace>MvcDocs.Tests</RootNamespace>
+    <AssemblyName>MvcDocs.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>

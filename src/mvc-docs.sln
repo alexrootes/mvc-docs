@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvc-docs", "mvc-docs\mvc-docs.csproj", "{C85DCB85-8E0F-4143-9F79-DB56655BC131}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcDocs", "MvcDocs\MvcDocs.csproj", "{C85DCB85-8E0F-4143-9F79-DB56655BC131}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F38ACC45-F136-4290-9132-3E6B2CAF0A79}"
 	ProjectSection(SolutionItems) = preProject
@@ -10,7 +10,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{F38ACC
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "mvc-docs-tests", "mvc-docs-tests\mvc-docs-tests.csproj", "{FA72F8B2-ED3E-4F1E-81B2-7F864B57A068}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcDocs.Tests", "MvcDocs.Tests\MvcDocs.Tests.csproj", "{FA72F8B2-ED3E-4F1E-81B2-7F864B57A068}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
