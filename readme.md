@@ -11,6 +11,7 @@ documentation system for the ASP.NET MVC framework.
 * Pretty URLs
 * Multi-product support
 * Multi-version support
+* Multi-language support
 * Theming
 * Access control
 * Minimal dependencies

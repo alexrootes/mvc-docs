@@ -1,0 +1,18 @@
+﻿@model dynamic
+
+@{
+    ViewBag.Title = "TOC";
+}
+
+<div id="doc-wrapper">
+    <div id="head">
+        <h1>TOC</h1>
+    </div>
+    <div id="doc-content">
+        <div id="doc-body">
+            <div class="markdown-body">
+				<a href="@Url.Action("View", new { product = "example", language = "en", version = "latest", url = "getting-started"})">Getting Started</a>
+            </div>
+        </div>
+    </div>
+</div>
