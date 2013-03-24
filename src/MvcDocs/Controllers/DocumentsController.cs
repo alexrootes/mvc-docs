@@ -14,12 +14,32 @@ using Lucene.Net.Search;
 using Lucene.Net.Store;
 using MarkdownSharp;
 using MvcDocs.Models.Documents;
+using MvcDocs.Services;
 using Version = Lucene.Net.Util.Version;
 
 namespace MvcDocs.Controllers
 {
     public class DocumentsController : Controller
     {
+	    private IDirectoryBrowser Browser { get; set; }
+	    private IDocumentFormatter Formatter { get; set; }
+
+		public DocumentsController(IDirectoryBrowser browser, IDocumentFormatter formatter)
+		{
+			if (browser == null)
+			{
+				throw new ArgumentNullException("browser");
+			}
+
+			if (formatter == null)
+			{
+				throw new ArgumentNullException("formatter");
+			}
+
+			this.Browser = browser;
+			this.Formatter = formatter;
+		}
+
         [HttpGet]
         public ActionResult Index(string product, string language, string version)
         {
@@ -35,6 +55,7 @@ namespace MvcDocs.Controllers
             return View(files);
         }
 
+		[HttpGet]
         public ActionResult Search(string term)
         {
             var results = new List<dynamic>();

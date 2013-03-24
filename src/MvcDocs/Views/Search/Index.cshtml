@@ -1,0 +1,15 @@
+﻿@model MvcDocs.Services.SearchResults
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Search</h2>
+@foreach (var document in Model.Documents)
+{
+	<div class="search-result">
+		<h3>@document.Title</h3>
+		<p>@document.Snippet</p>
+		<small>@document.Score</small>
+	</div>
+}
