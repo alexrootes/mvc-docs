@@ -1,0 +1,14 @@
+﻿@model List<dynamic>
+
+@{
+    ViewBag.Title = "Search";
+}
+
+<h2>Search</h2>
+
+@foreach (var result in Model)
+{
+    <h2>@result.Make</h2>
+    <h3>@result.Model</h3>
+    <hr />
+}
