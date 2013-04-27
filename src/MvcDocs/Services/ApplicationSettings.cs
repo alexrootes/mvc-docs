@@ -1,6 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Collections.Generic;
-using System;
 
 namespace MvcDocs.Services
 {
@@ -8,12 +8,17 @@ namespace MvcDocs.Services
 	{
 		public string GetRepositoryPath()
 		{
-			return System.Configuration.ConfigurationManager.AppSettings["App.Repository.Path"].EnsureAbsolutePath();
+			return GetSetting("App.Repository.Path").EnsureAbsolutePath();
 		}
 
 		public string GetSearchIndexPath()
 		{
-			return System.Configuration.ConfigurationManager.AppSettings["App.Search.Index.Path"].EnsureAbsolutePath();
+			return GetSetting("App.Search.Index.Path").EnsureAbsolutePath();
+		}
+
+		private static string GetSetting(string name)
+		{
+			return System.Configuration.ConfigurationManager.AppSettings[name];
 		}
 	}
 }

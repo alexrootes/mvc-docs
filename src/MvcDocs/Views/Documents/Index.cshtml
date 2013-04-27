@@ -1,12 +1,14 @@
-﻿@model dynamic
+﻿@using MvcDocs
+
+@model IEnumerable<string>
 
 @{
-    ViewBag.Title = "TOC";
+    ViewBag.Title = "Example | Contents";
 }
 
 <div id="doc-wrapper">
     <div id="head">
-        <h1>TOC</h1>
+        <h1>Contents</h1>
     </div>
     <div id="doc-content">
         <div id="doc-body">
@@ -14,7 +16,7 @@
                 <ul>
                     @foreach (var file in Model)
                     {
-                        <li><a href="@Url.Action("View", new { product = "example", language = "en", version = "latest", url = ((string)file).Replace(" ", "-").ToLower() })">@file</a></li>
+                        <li><a href="@Url.Action("View", new { product = "example", language = "en", version = "latest", url = file.ToLower() })">@file.FormatTitleForDisplay()</a></li>
                     }
                 </ul>
             </div>

@@ -1,15 +1,15 @@
-﻿@model MvcDocs.Services.SearchResults
+﻿@model MvcDocs.Models.Search.IndexModel
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Search";
 }
 
 <h2>Search</h2>
-@foreach (var document in Model.Documents)
+@foreach (var doc in Model.Documents)
 {
 	<div class="search-result">
-		<h3>@document.Title</h3>
-		<p>@document.Snippet</p>
-		<small>@document.Score</small>
+		<h3><a href="@Url.Action("View", "Documents", new { product = "example", language = "en", version = "latest", url = doc.Url })">@doc.Title</a></h3>
+		<p>@Html.Raw(doc.SnippetHtml) ...</p>
+		<small>@doc.Score</small>
 	</div>
 }

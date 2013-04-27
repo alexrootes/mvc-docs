@@ -1,14 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Mvc;
+using MvcDocs.Models.Search;
+using MvcDocs.Models.Shared;
 using MvcDocs.Services;
 
 namespace MvcDocs.Controllers
 {
-    public class SearchController : Controller
-    {
-		private ISearcher Searcher { get; set; }
+	public class SearchController : Controller
+	{
+		private readonly ISearcher _searcher;
 
 		public SearchController(ISearcher searcher)
 		{
@@ -17,15 +20,24 @@ namespace MvcDocs.Controllers
 				throw new ArgumentNullException("searcher");
 			}
 
-			this.Searcher = searcher;
+			_searcher = searcher;
 		}
 
 		[HttpGet]
-        public ActionResult Index(string productName, string language, string version, string term)
+		public ActionResult Index(DocumentRootModel rootModel, [Required] string term)
 		{
-			var results = this.Searcher.Search(productName, language, version, term.Split(" "[0]));
+			if (ModelState.IsValid == false)
+			{
+				return HttpNotFound();
+			}
 
-			return View(results);
-        }
-    }
+			var root = rootModel.ToDocumentRoot();
+
+			var results = _searcher.Search(root, term);
+
+			return View(
+				new IndexModel(results, term)
+			);
+		}
+	}
 }

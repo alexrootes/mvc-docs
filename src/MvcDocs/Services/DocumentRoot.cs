@@ -19,7 +19,7 @@ namespace MvcDocs.Services
 
 		public string ToPath()
 		{
-			return string.Format("/{0}/{1}/{2}", this.Product, this.Language, this.Version);
+			return string.Format("{0}/{1}/{2}", this.Product, this.Language, this.Version);
 		}
 	}
 }

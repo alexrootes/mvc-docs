@@ -8,6 +8,8 @@ namespace MvcDocs.Services
 {
 	public class DefaultDirectoryBrowser : IDirectoryBrowser
 	{
+		private const string DocumentExtension = ".md";
+
 		private IApplicationSettings Settings { get; set; }
 
 		public DefaultDirectoryBrowser(IApplicationSettings settings)
@@ -22,29 +24,49 @@ namespace MvcDocs.Services
 
 		public IList<string> ListProducts()
 		{
-			throw new NotImplementedException();
+			var path = this.Settings.GetRepositoryPath();
+
+			return Directory.GetDirectories(path)
+				.Select(Path.GetFileName)
+				.OrderBy(name => name)
+				.ToList();
 		}
 
 		public IList<string> ListLanguages(string product)
 		{
-			throw new NotImplementedException();
+			var path = Path.Combine(this.Settings.GetRepositoryPath(), product);
+
+			return Directory.GetDirectories(path)
+				.Select(Path.GetFileName)
+				.OrderBy(name => name)
+				.ToList();
 		}
 
 		public IList<string> ListVersions(string product, string language)
 		{
-			throw new NotImplementedException();
+			var path = Path.Combine(this.Settings.GetRepositoryPath(), Path.Combine(product, language));
+
+			return Directory.GetDirectories(path)
+				.Select(Path.GetFileName)
+				.OrderBy(name => name)
+				.ToList();
 		}
 
 		public IEnumerable<DocumentRoot> ListDocumentRoots()
 		{
-			throw new NotImplementedException();
+			return (
+				from product in ListProducts() 
+				from language in ListLanguages(product) 
+				from version in ListVersions(product, language) 
+				select new DocumentRoot(product, language, version)
+			);
 		}
 
 		public IEnumerable<string> ListDocumentNames(DocumentRoot root)
 		{
 			var path = Path.Combine(this.Settings.GetRepositoryPath(), root.ToPath());
 
-			return Directory.GetFiles(path, "*.md")
+			return Directory.GetFiles(path, "*" + DocumentExtension)
 				.Select(Path.GetFileName)
 				.Select(f => f.Substring(0, f.Length - 3)) // strip file extension
 				.ToList();
@@ -57,14 +79,15 @@ namespace MvcDocs.Services
 
 		public MarkdownDocument GetDocument(DocumentRoot root, string name)
 		{
-			var path = GetAbsoluteDocumentRootPath(root);
+			var rootPath = GetAbsoluteDocumentRootPath(root);
+			var docPath = Path.Combine(rootPath, name + DocumentExtension);
 
-			if (File.Exists(path) == false)
+			if (File.Exists(docPath) == false)
 			{
-				throw new Exception(string.Format("No document with the name {0} could be found. [{1}]", name, path));
+				throw new Exception(string.Format("No document with the name {0} could be found. [{1}]", name, rootPath));
 			}
 
-			return new MarkdownDocument { Title = name, Markdown = File.ReadAllText(path, Encoding.UTF8) };
+			return new MarkdownDocument { Title = name, Markdown = File.ReadAllText(docPath, Encoding.UTF8) };
 		}
 
 		private string GetAbsoluteDocumentRootPath(DocumentRoot root)

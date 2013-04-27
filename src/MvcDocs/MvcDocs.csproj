@@ -120,29 +120,58 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Services\ApplicationSettings.cs" />
     <Compile Include="Bootstrapper.cs" />
     <Compile Include="Controllers\DocumentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SearchController.cs" />
-    <Compile Include="Services\DefaultDirectoryBrowser.cs" />
-    <Compile Include="Services\DefaultDocumentFormatter.cs" />
     <Compile Include="EnumerableExtensions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Services\DocumentRoot.cs" />
-    <Compile Include="Services\IApplicationSettings.cs" />
-    <Compile Include="Services\IDirectoryBrowser.cs" />
-    <Compile Include="Services\IDocumentFormatter.cs" />
-    <Compile Include="Services\ISearcher.cs" />
-    <Compile Include="Services\ISearchIndexer.cs" />
-    <Compile Include="Services\LuceneSearchIndexer.cs" />
-    <Compile Include="Services\MarkdownDocument.cs" />
     <Compile Include="Models\Documents\ViewModel.cs" />
+    <Compile Include="Models\Search\IndexModel.cs" />
+    <Compile Include="Models\Shared\DocumentRootModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\SearchResult.cs" />
-    <Compile Include="Services\SearchResults.cs" />
+    <Compile Include="Services\ApplicationSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\DefaultDirectoryBrowser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\DefaultDocumentFormatter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\DocumentRoot.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\IApplicationSettings.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\IDirectoryBrowser.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\IDocumentFormatter.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\ISearcher.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\ISearchIndexer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\LuceneSearcher.cs" />
+    <Compile Include="Services\LuceneSearchIndexer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\MarkdownDocument.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\SearchResult.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Services\SearchResults.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="SiteModule.cs" />
     <Compile Include="StringExtensions.cs" />
   </ItemGroup>
@@ -179,9 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Documents\View.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Documents\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Search\Index.cshtml" />

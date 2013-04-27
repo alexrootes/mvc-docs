@@ -7,7 +7,7 @@ namespace MvcDocs.Services
 	public class SearchResult
 	{
 		public string Title { get; set; }
-		public int Score { get; set; } // maybe
+		public float Score { get; set; }
 		public string Snippet { get; set; }
 	}
 }

@@ -26,7 +26,7 @@ namespace MvcDocs
 				t => Bootstrapper.Kernel.TryGet(t),
 				t => Bootstrapper.Kernel.GetBindings(t)
 			);
-			
+
 			// start an async build of our search indexes
 			Bootstrapper.Kernel.Get<ISearchIndexer>().IndexAsync();
 		}

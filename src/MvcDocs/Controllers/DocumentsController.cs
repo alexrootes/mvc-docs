@@ -1,28 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
-using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Web.Mvc;
-using Lucene.Net.Analysis.Standard;
-using Lucene.Net.Index;
-using Lucene.Net.QueryParsers;
-using Lucene.Net.Search;
-using Lucene.Net.Store;
 using MarkdownSharp;
 using MvcDocs.Models.Documents;
+using MvcDocs.Models.Shared;
 using MvcDocs.Services;
-using Version = Lucene.Net.Util.Version;
 
 namespace MvcDocs.Controllers
 {
     public class DocumentsController : Controller
     {
-	    private IDirectoryBrowser Browser { get; set; }
-	    private IDocumentFormatter Formatter { get; set; }
+	    private readonly IDirectoryBrowser _browser;
+	    private readonly IDocumentFormatter _formatter;
 
 		public DocumentsController(IDirectoryBrowser browser, IDocumentFormatter formatter)
 		{
@@ -36,66 +30,31 @@ namespace MvcDocs.Controllers
 				throw new ArgumentNullException("formatter");
 			}
 
-			this.Browser = browser;
-			this.Formatter = formatter;
+			this._browser = browser;
+			this._formatter = formatter;
 		}
 
         [HttpGet]
-        public ActionResult Index(string product, string language, string version)
+        public ActionResult Index(DocumentRootModel model)
         {
-            // show TOC
-            var repo = FileHelper.GetRepositoryPath(product, language, version);
+	        var root = model.ToDocumentRoot();
 
-            IEnumerable<string> files;
-            using (var reader = new DocumentRepositoryReader(repo))
-            {
-                files = reader.GetMarkDownFiles();
-            }
-
-            return View(files);
-        }
-
-		[HttpGet]
-        public ActionResult Search(string term)
-        {
-            var results = new List<dynamic>();
-
-            using (var directory = FSDirectory.Open(new DirectoryInfo("C:\\Temp\\index")))
-            using (var indexReader = IndexReader.Open(directory, true))
-            using (var indexSearch = new IndexSearcher(indexReader))
-            {
-                var analyzer = new StandardAnalyzer(Version.LUCENE_30);
-
-                // multi-field example
-                //var fields = new[] {"Make", "Model"};
-                //var queryParser = new MultiFieldQueryParser(Version.LUCENE_30, fields, analyzer);
-
-                var queryParser = new QueryParser(Version.LUCENE_30, "Make", analyzer);
-                var query = queryParser.Parse("Ford");
-
-                var resultDocs = indexSearch.Search(query, indexReader.MaxDoc);
-                var hits = resultDocs.ScoreDocs;
-                foreach (var hit in hits)
-                {
-                    var doc = indexSearch.Doc(hit.Doc);
-
-                    dynamic result = new ExpandoObject();
-                    result.Make = doc.Get("Make");
-                    result.Model = doc.Get("Model");
-                    results.Add(result);
-                }
-            }
-
-            return View(results);
+            return View(
+				_browser.ListDocumentNames(root)
+			);
         }
 
         [HttpGet]
-        public ActionResult View(string product, string language, string version, string url)
+        public ActionResult View(DocumentRootModel rootModel, string url)
         {
+	        var language = rootModel.Language;
+	        var product = rootModel.Product;
+	        var version = rootModel.Version;
+
             var repo = Server.MapPath("~/App_Docs/");
 
-            var file = url.Split("/"[0]).Last().Replace("-", " ");
-            var title = CultureInfo.CurrentCulture.TextInfo.ToTitleCase(file);
+            var file = url.Split("/"[0]).Last();
+	        var title = file.FormatTitleForDisplay();
 
             // TODO: does file exist on disk, if so return it ...
             if (file.EndsWith(".png"))

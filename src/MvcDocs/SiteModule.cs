@@ -12,6 +12,7 @@ namespace MvcDocs
 		{
 			Bind<IApplicationSettings>().To<ApplicationSettings>();
 			Bind<ISearchIndexer>().To<LuceneSearchIndexer>();
+			Bind<ISearcher>().To<LuceneSearcher>();
 			Bind<IDirectoryBrowser>().To<DefaultDirectoryBrowser>();
 			Bind<IDocumentFormatter>().To<DefaultDocumentFormatter>();
 		}
