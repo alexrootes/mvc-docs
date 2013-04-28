@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace MvcDocs
 {
@@ -20,19 +21,35 @@ namespace MvcDocs
 		public static string Cut(this string source, int length)
 		{
 			if (string.IsNullOrEmpty(source) || source.Length < length)
+			{
 				return source;
+			}
 
 			return source.Substring(0, length);
 		}
 
 		public static string Highlight(this string source, string[] terms)
 		{
-			return source.Replace(terms[0], "<strong>" + terms[0] + "</strong>");
+			if (terms == null || terms.Length == 0)
+			{
+				return source;
+			}
+
+			var pattern = @"\b(" + terms.Aggregate((x, y) => x + "|" + y) + @")\b";
+
+			return Regex.Replace(source, pattern, "<span class=\"hl\">$0</span>", RegexOptions.IgnoreCase);
 		}
 
 		public static string FormatTitleForDisplay(this string source)
 		{
-			return CultureInfo.CurrentCulture.TextInfo.ToTitleCase(source).Replace("-", " ");
+			if (string.IsNullOrEmpty(source))
+			{
+				return source;
+			}
+
+			var textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+			return textInfo.ToTitleCase(source).Replace("-", " ");
 		}
 	}
 }

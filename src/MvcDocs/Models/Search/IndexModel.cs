@@ -10,10 +10,12 @@ namespace MvcDocs.Models.Search
 		public IList<DocumentModel> Documents { get; set; }
 
 		public int Count { get; set; }
+		public string Term { get; set; }
 
 		public IndexModel(SearchResults results, string term)
 		{
 			this.Count = results.Hits;
+			this.Term = term;
 
 			this.Documents = results.Documents.Select(r => new DocumentModel
 			{

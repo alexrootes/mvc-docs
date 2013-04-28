@@ -12,6 +12,11 @@ p {
     margin: 15px;
 }
 
+#search-results .hl {
+	background-color: yellow;
+	font-weight: bold;
+}
+
 #doc-wrapper {
     margin-left: auto;
     margin-right: auto;

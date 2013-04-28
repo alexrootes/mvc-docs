@@ -4,12 +4,29 @@
     ViewBag.Title = "Search";
 }
 
-<h2>Search</h2>
-@foreach (var doc in Model.Documents)
-{
-	<div class="search-result">
-		<h3><a href="@Url.Action("View", "Documents", new { product = "example", language = "en", version = "latest", url = doc.Url })">@doc.Title</a></h3>
-		<p>@Html.Raw(doc.SnippetHtml) ...</p>
-		<small>@doc.Score</small>
+<div id="doc-wrapper">
+	<div id="head">
+		<h1>Search</h1>
 	</div>
-}
+	<div id="search" style="margin-bottom: 15px;">
+		@using (Html.BeginForm("Index", "Search", new { }, FormMethod.Get))
+		{
+			<label for="search-box">Search:</label>@Html.TextBox("term")
+		}
+	</div>
+    <div id="doc-content">
+	    <div id="doc-body">
+		    <small>Showing search results for <em>'@(Model.Term)'</em></small>
+		    <div id="search-results" class="markdown-body">
+			    @foreach (var doc in Model.Documents)
+			    {
+				    <div class="search-result">
+					    <h3><a href="@Url.Action("View", "Documents", new { url = doc.Url })">@doc.Title</a></h3>
+					    <p>@Html.Raw(doc.SnippetHtml) ...</p>
+					    <small>@doc.Score</small>
+				    </div>
+			    }
+		    </div>
+	    </div>
+    </div>
+</div>

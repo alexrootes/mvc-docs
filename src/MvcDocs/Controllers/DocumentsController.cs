@@ -105,6 +105,7 @@ namespace MvcDocs.Controllers
 
             dynamic doc = new ExpandoObject();
 
+	        doc.Product = rootModel.Product;
             doc.Title = title;
             doc.Content = html;
 
