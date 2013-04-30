@@ -87,7 +87,7 @@ namespace MvcDocs.Services
 				throw new Exception(string.Format("No document with the name {0} could be found. [{1}]", name, rootPath));
 			}
 
-			return new MarkdownDocument { Title = name, Markdown = File.ReadAllText(docPath, Encoding.UTF8) };
+			return new MarkdownDocument(root, name, File.ReadAllText(docPath, Encoding.UTF8));
 		}
 
 		private string GetAbsoluteDocumentRootPath(DocumentRoot root)

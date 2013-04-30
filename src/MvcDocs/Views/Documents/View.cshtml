@@ -1,4 +1,5 @@
-﻿@model dynamic
+﻿@using MvcDocs
+@model MvcDocs.Models.Documents.ViewModel
 
 @{
     ViewBag.Title = @Model.Title;
@@ -16,12 +17,12 @@
 
 <div id="doc-wrapper">
 	<div id="head">
-		<h1>@Html.Raw(Model.Title)</h1>
+		<h1>@Html.Raw(Model.Title.FormatTitleForDisplay())</h1>
 	</div>
     <div id="doc-content">
         <div id="doc-body">
             <div class="markdown-body">
-                @Html.Raw(@Model.Content)
+                @Html.Raw(@Model.Html)
             </div>
         </div>
     </div>
