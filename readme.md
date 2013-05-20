@@ -20,4 +20,4 @@ documentation system for the ASP.NET MVC framework.
 
 ## Getting started
 
-\* todo \*
+\* to be completed \*
