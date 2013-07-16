@@ -1,0 +1,16 @@
+﻿@using MvcDocs
+
+@model MvcDocs.Models.Documents.IndexProductsModel
+
+@{
+    ViewBag.Title = "Available Products";
+}
+
+<div id="list-products">
+    <ul>
+        @foreach (var product in Model.Products)
+        {
+            <li><a href="@Url.Action("IndexLanguages", new { product })">@product.FormatTitleForDisplay()</a></li>
+        }
+    </ul>
+</div>

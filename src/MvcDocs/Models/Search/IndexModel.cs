@@ -11,11 +11,13 @@ namespace MvcDocs.Models.Search
 
 		public int Count { get; set; }
 		public string Term { get; set; }
+		public string Product { get; set; }
 
-		public IndexModel(SearchResults results, string term)
+		public IndexModel(SearchResults results, string term, string product)
 		{
 			this.Count = results.Hits;
 			this.Term = term;
+			this.Product = product;
 
 			this.Documents = results.Documents.Select(r => new DocumentModel
 			{

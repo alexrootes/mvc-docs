@@ -12,6 +12,13 @@
 </head>
 <body>
     <div>
+        <div id="search">
+            <a href="@Url.Action("IndexProducts", "Documents")">All Products</a>
+            @using (Html.BeginForm("Index", "Search", new { }, FormMethod.Get))
+            {
+                <label for="search-box">Search:</label><input id="search-box" name="term" type="text"/>
+            }
+        </div>
         @RenderBody()
     </div>
 </body>

@@ -17,6 +17,16 @@ namespace MvcDocs.Services
 			this.Version = version;
 		}
 
+		public DocumentRoot OfLanguage(string language)
+		{
+			return new DocumentRoot(this.Product, language, this.Version);
+		}
+
+		public DocumentRoot OfVersion(string version)
+		{
+			return new DocumentRoot(this.Product, this.Language, version);
+		}
+
 		public string ToPath()
 		{
 			return string.Format("{0}/{1}/{2}", this.Product, this.Language, this.Version);

@@ -9,7 +9,7 @@ namespace MvcDocs.Controllers
     {
         public ActionResult Index()
         {
-			return RedirectToAction("Index", "Documents", new { product = "example", language = "en", version = "latest" });
+			return RedirectToAction("IndexProducts", "Documents");
         }
     }
 }

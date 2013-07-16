@@ -1,0 +1,17 @@
+﻿@using MvcDocs
+
+@model MvcDocs.Models.Documents.IndexLanguagesModel
+
+@{
+    ViewBag.Title = String.Format("Available Languages for {0}", Model.Product);
+}
+
+<div id="list-languages">
+    <span id="product">@Model.Product.FormatTitleForDisplay()</span>
+    <ul>
+        @foreach (var language in Model.Languages)
+        {
+            <li><a href="@Url.Action("IndexVersions", new { product = Model.Product, language })">@language</a></li>
+        }
+    </ul>
+</div>

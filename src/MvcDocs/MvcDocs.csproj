@@ -128,6 +128,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="MimeSniffer.cs" />
+    <Compile Include="Models\Documents\IndexProductsModel.cs" />
+    <Compile Include="Models\Documents\IndexLanguagesModel.cs" />
+    <Compile Include="Models\Documents\IndexVersionsModel.cs" />
+    <Compile Include="Models\Documents\IndexModel.cs" />
     <Compile Include="Models\Documents\ViewModel.cs" />
     <Compile Include="Models\Search\IndexModel.cs" />
     <Compile Include="Models\Shared\DocumentRootModel.cs" />
@@ -211,6 +216,18 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Search\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="mime.types" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Documents\IndexVersions.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Documents\IndexLanguages.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Documents\IndexProducts.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

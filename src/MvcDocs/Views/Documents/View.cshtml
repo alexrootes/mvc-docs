@@ -2,17 +2,29 @@
 @model MvcDocs.Models.Documents.ViewModel
 
 @{
-    ViewBag.Title = @Model.Title;
+    ViewBag.Title = String.Format("{1} - {0}", Model.Product.FormatTitleForDisplay(), Model.Title);
 }
 
 <div id="product-logo" class="@(Model.Product)-logo"></div>
 
-<div id="search">
-	<a href="@Url.Action("Index")">Index</a>
-	@using (Html.BeginForm("Index", "Search", new { }, FormMethod.Get))
-	{
-		<label for="search-box">Search:</label><input id="search-box" name="term" type="text"/>
-	}
+<div id="doc-head">
+    <a href="@Url.Action("Index", "Documents")">@Model.Product.FormatTitleForDisplay()</a>
+    <div id="language-list">
+        <ul>
+            @foreach (var language in Model.Languages)
+            {
+                <li><a href="@Url.Action("View", "Documents", new { product = Model.Product, language = language, version = Model.Version, url = Model.Url })">@language</a></li>
+            }
+        </ul>
+    </div>
+    <div id="version-list">
+        <ul>
+            @foreach (var version in Model.Versions)
+            {
+                <li><a href="@Url.Action("View", "Documents", new { product = Model.Product, language = Model.Language, version = version, url = Model.Url })">@version.FormatVersionForDisplay()</a></li>
+            }
+        </ul>
+    </div>
 </div>
 
 <div id="doc-wrapper">

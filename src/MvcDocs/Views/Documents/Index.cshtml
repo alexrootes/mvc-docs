@@ -1,25 +1,19 @@
 ﻿@using MvcDocs
 
-@model IEnumerable<string>
+@model MvcDocs.Models.Documents.IndexModel
 
 @{
-    ViewBag.Title = "Example | Contents";
+    ViewBag.Title = String.Format("Contents of {0} - {1} - {2}", Model.DocumentRoot.Product, Model.DocumentRoot.Language, Model.DocumentRoot.Version);
 }
 
-<div id="doc-wrapper">
-    <div id="head">
-        <h1>Contents</h1>
-    </div>
-    <div id="doc-content">
-        <div id="doc-body">
-            <div class="markdown-body">
-                <ul>
-                    @foreach (var file in Model)
-                    {
-                        <li><a href="@Url.Action("View", new { product = "example", language = "en", version = "latest", url = file.ToLower() })">@file.FormatTitleForDisplay()</a></li>
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>
+<div id="list-documents">
+    <span id="product">@Model.DocumentRoot.Product.FormatTitleForDisplay()</span>
+    <span id="language">@Model.DocumentRoot.Language</span>
+    <span id="version">@Model.DocumentRoot.Version.FormatVersionForDisplay()</span>
+    <ul>
+        @foreach (var file in Model.Documents)
+        {
+            <li><a href="@Url.Action("View", new { product = Model.DocumentRoot.Product, language = Model.DocumentRoot.Language, version = Model.DocumentRoot.Version, url = file.ToLower() })">@file.FormatTitleForDisplay()</a></li>
+        }
+    </ul>
 </div>

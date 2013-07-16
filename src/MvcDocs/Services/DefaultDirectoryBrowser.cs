@@ -25,11 +25,14 @@ namespace MvcDocs.Services
 		public IList<string> ListProducts()
 		{
 			var path = this.Settings.GetRepositoryPath();
-
-			return Directory.GetDirectories(path)
-				.Select(Path.GetFileName)
-				.OrderBy(name => name)
-				.ToList();
+			if (!Directory.Exists(path))
+				throw new InvalidOperationException(String.Format("Document root directory {0} does not exist. Please check settings.", path));
+			var docRoot = new DirectoryInfo(path);
+			return docRoot.GetDirectories()
+			              .Where(directory => !directory.Attributes.HasFlag(FileAttributes.Hidden))
+			              .Select(directory => directory.Name)
+			              .OrderBy(name => name)
+			              .ToList();
 		}
 
 		public IList<string> ListLanguages(string product)
@@ -68,7 +71,7 @@ namespace MvcDocs.Services
 
 			return Directory.GetFiles(path, "*" + DocumentExtension)
 				.Select(Path.GetFileName)
-				.Select(f => f.Substring(0, f.Length - 3)) // strip file extension
+				.Select(f => f.Substring(0, f.LastIndexOf("."))) // strip file extension
 				.ToList();
 		}
 
@@ -82,12 +85,24 @@ namespace MvcDocs.Services
 			var rootPath = GetAbsoluteDocumentRootPath(root);
 			var docPath = Path.Combine(rootPath, name + DocumentExtension);
 
-			if (File.Exists(docPath) == false)
+			if (DocumentExists(root, name) == false)
 			{
 				throw new Exception(string.Format("No document with the name {0} could be found. [{1}]", name, rootPath));
 			}
 
 			return new MarkdownDocument(root, name, File.ReadAllText(docPath, Encoding.UTF8));
+		}
+
+		public bool DocumentExists(DocumentRoot root, string name)
+		{
+			var rootPath = GetAbsoluteDocumentRootPath(root);
+			var docPath = Path.Combine(rootPath, GetDocumentRootFileName(name));
+			return File.Exists(docPath);
+		}
+
+		private static string GetDocumentRootFileName(string name, string extension = DocumentExtension)
+		{
+			return name.EndsWith(extension) ? name : name + DocumentExtension;
 		}
 
 		private string GetAbsoluteDocumentRootPath(DocumentRoot root)

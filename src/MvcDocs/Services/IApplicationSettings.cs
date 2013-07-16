@@ -8,5 +8,6 @@ namespace MvcDocs.Services
 	{
 		string GetRepositoryPath();
 		string GetSearchIndexPath();
+		IEnumerable<string> GetHomeDocuments();
 	}
 }

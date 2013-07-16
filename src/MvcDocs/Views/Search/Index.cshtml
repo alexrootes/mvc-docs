@@ -1,8 +1,11 @@
-﻿@model MvcDocs.Models.Search.IndexModel
+﻿@using MvcDocs
+@model MvcDocs.Models.Search.IndexModel
 
 @{
     ViewBag.Title = "Search";
 }
+
+<a href="@Url.Action("IndexLanguages", "Documents", new { product = Model.Product })">@Model.Product.FormatTitleForDisplay()</a>
 
 <div id="doc-wrapper">
 	<div id="head">

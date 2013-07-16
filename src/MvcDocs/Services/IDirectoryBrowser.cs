@@ -15,5 +15,7 @@ namespace MvcDocs.Services
 		IEnumerable<MarkdownDocument> ListDocuments(DocumentRoot root);
 
 		MarkdownDocument GetDocument(DocumentRoot root, string name);
+
+		bool DocumentExists(DocumentRoot root, string name);
 	}
 }

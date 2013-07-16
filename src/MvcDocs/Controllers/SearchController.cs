@@ -36,7 +36,7 @@ namespace MvcDocs.Controllers
 			var results = _searcher.Search(root, term);
 
 			return View(
-				new IndexModel(results, term)
+				new IndexModel(results, term, rootModel.Product)
 			);
 		}
 	}

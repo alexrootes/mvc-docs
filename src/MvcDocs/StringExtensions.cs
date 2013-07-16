@@ -51,5 +51,10 @@ namespace MvcDocs
 
 			return textInfo.ToTitleCase(source).Replace("-", " ");
 		}
+
+		public static string FormatVersionForDisplay(this string source)
+		{
+			return string.IsNullOrEmpty(source) ? source : source.Replace("_", ".");
+		}
 	}
 }
