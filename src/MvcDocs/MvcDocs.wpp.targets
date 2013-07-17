@@ -1,6 +1,5 @@
 ﻿<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
 	<Target Name="CustomCollectFiles" AfterTargets="CollectFilesFromContent">
-		<Message Text="=== CustomCollectFiles ===" Importance="high" />
 		<ItemGroup>
 			<_CustomFiles Include=".\App_Docs\**\*" Exclude=".\App_Docs\example\" />
 			<FilesForPackagingFromProject Include="%(_CustomFiles.Identity)">
@@ -10,8 +9,8 @@
     <ItemGroup>
       <MsDeploySkipRules>
         <SkipAction>Delete</SkipAction>
-        <ObjectName>dirPath</ObjectName>
-        <AbsolutePath>App_Docs\\\*\*\\$</AbsolutePath>
+        <ObjectName>filePath</ObjectName>
+        <AbsolutePath>\\App_Docs\\.*</AbsolutePath>
       </MsDeploySkipRules>
     </ItemGroup>
 	</Target>
