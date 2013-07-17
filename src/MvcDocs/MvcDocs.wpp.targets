@@ -13,15 +13,16 @@
   </PropertyGroup>
 
   <Target Name="AddCustomSkipRules">
+    <Message Text="Adding Skip Rules" />
     <ItemGroup>
       <MsDeploySkipRules>
         <SkipAction>Delete</SkipAction>
-        <ObjectName>dirPath</ObjectName>
-        <AbsolutePath>.*\\App_Docs$</AbsolutePath>
+        <ObjectName>filePath</ObjectName>
+        <AbsolutePath>.*\\App_Docs\\.*</AbsolutePath>
       </MsDeploySkipRules>
       <MsDeploySkipRules>
         <SkipAction>Delete</SkipAction>
-        <ObjectName>filePath</ObjectName>
+        <ObjectName>dirPath</ObjectName>
         <AbsolutePath>.*\\App_Docs\\.*</AbsolutePath>
       </MsDeploySkipRules>
     </ItemGroup>    
