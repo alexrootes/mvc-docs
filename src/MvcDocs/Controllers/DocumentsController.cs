@@ -44,7 +44,7 @@ namespace MvcDocs.Controllers
 
 	        var homeDoc = _settings.GetHomeDocuments().FirstOrDefault(doc => _browser.DocumentExists(root, doc));
 	        if (homeDoc == null) return View(new IndexModel(root, _browser.ListDocumentNames(root)));
-	        return RedirectToAction("View", new { model, url = homeDoc } );
+	        return RedirectToAction("View", new { url = homeDoc } );
         }
 
 		[HttpGet]
