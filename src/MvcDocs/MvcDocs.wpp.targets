@@ -8,11 +8,7 @@
 		</ItemGroup>
   </Target>
 
-  <PropertyGroup>
-    <AfterAddIisSettingAndFileContentsToSourceManifest>AddCustomSkipRules</AfterAddIisSettingAndFileContentsToSourceManifest>
-  </PropertyGroup>
-
-  <Target Name="AddCustomSkipRules">
+  <Target Name="AddCustomSkipRules" AfterTargets="AddIisSettingAndFileContentsToSourceManifest">
     <ItemGroup>
       <MsDeploySkipRules Include="SkipAppDocs">
         <SkipAction>Delete</SkipAction>
