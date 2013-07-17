@@ -6,12 +6,14 @@
 				<DestinationRelativePath>App_Docs\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
 			</FilesForPackagingFromProject>
 		</ItemGroup>
+  </Target>
+  <Target Name="AddSkipRules">
     <ItemGroup>
       <MsDeploySkipRules>
         <SkipAction>Delete</SkipAction>
         <ObjectName>filePath</ObjectName>
-        <AbsolutePath>.*\\App_Docs\\.*</AbsolutePath>
+        <AbsolutePath>App_Docs</AbsolutePath>
       </MsDeploySkipRules>
-    </ItemGroup>
-	</Target>
+    </ItemGroup>    
+  </Target>
 </Project>
