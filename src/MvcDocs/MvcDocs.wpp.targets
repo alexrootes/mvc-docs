@@ -7,12 +7,17 @@
 			</FilesForPackagingFromProject>
 		</ItemGroup>
   </Target>
-  <Target Name="AddSkipRules">
+
+  <PropertyGroup>
+    <OnBeforePackageUsingManifest>AddCustomSkipRules</OnBeforePackageUsingManifest>
+  </PropertyGroup>
+
+  <Target Name="AddCustomSkipRules">
     <ItemGroup>
       <MsDeploySkipRules>
         <SkipAction>Delete</SkipAction>
         <ObjectName>filePath</ObjectName>
-        <AbsolutePath>App_Docs</AbsolutePath>
+        <AbsolutePath>\\App_Docs\\.*</AbsolutePath>
       </MsDeploySkipRules>
     </ItemGroup>    
   </Target>
