@@ -13,12 +13,12 @@
       <MsDeploySkipRules Include="SkipAppDocs">
         <SkipAction>Delete</SkipAction>
         <ObjectName>filePath</ObjectName>
-        <AbsolutePath>.*\\App_Docs\\.*</AbsolutePath>
+        <AbsolutePath>App_Docs</AbsolutePath>
       </MsDeploySkipRules>
       <MsDeploySkipRules Include="SkipAppDocs">
         <SkipAction>Delete</SkipAction>
         <ObjectName>dirPath</ObjectName>
-        <AbsolutePath>.*\\App_Docs\\.*</AbsolutePath>
+        <AbsolutePath>App_Docs</AbsolutePath>
       </MsDeploySkipRules>
     </ItemGroup>
   </Target>
