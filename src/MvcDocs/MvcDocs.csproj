@@ -230,7 +230,7 @@
     <Content Include="Views\Documents\IndexProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="MvcDocs.wpp.targets" />
+    <None Include="MvcDocs.wpp.targets" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
