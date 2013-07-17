@@ -7,5 +7,12 @@
 				<DestinationRelativePath>App_Docs\%(RecursiveDir)%(Filename)%(Extension)</DestinationRelativePath>
 			</FilesForPackagingFromProject>
 		</ItemGroup>
+    <ItemGroup>
+      <MsDeploySkipRules>
+        <SkipAction>Delete</SkipAction>
+        <ObjectName>dirPath</ObjectName>
+        <AbsolutePath>App_Docs$</AbsolutePath>
+      </MsDeploySkipRules>
+    </ItemGroup>
 	</Target>
 </Project>
