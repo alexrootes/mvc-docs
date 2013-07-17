@@ -10,22 +10,20 @@
 
   <PropertyGroup>
     <OnBeforePackageUsingManifest>AddCustomSkipRules</OnBeforePackageUsingManifest>
-    <UseMsDeployExe>true</UseMsDeployExe>
   </PropertyGroup>
 
   <Target Name="AddCustomSkipRules">
-    <Message Text="Adding Skip Rules" />
     <ItemGroup>
-      <MsDeploySkipRules>
+      <MsDeploySkipRules Include="SkipAppDocs">
         <SkipAction>Delete</SkipAction>
         <ObjectName>filePath</ObjectName>
         <AbsolutePath>.*\\App_Docs\\.*</AbsolutePath>
       </MsDeploySkipRules>
-      <MsDeploySkipRules>
+      <MsDeploySkipRules Include="SkipAppDocs">
         <SkipAction>Delete</SkipAction>
         <ObjectName>dirPath</ObjectName>
         <AbsolutePath>.*\\App_Docs\\.*</AbsolutePath>
       </MsDeploySkipRules>
-    </ItemGroup>    
+    </ItemGroup>
   </Target>
 </Project>
