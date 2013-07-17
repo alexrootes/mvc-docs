@@ -9,7 +9,7 @@
   </Target>
 
   <PropertyGroup>
-    <OnBeforePackageUsingManifest>AddCustomSkipRules</OnBeforePackageUsingManifest>
+    <AfterAddIisSettingAndFileContentsToSourceManifest>AddCustomSkipRules</AfterAddIisSettingAndFileContentsToSourceManifest>
   </PropertyGroup>
 
   <Target Name="AddCustomSkipRules">
