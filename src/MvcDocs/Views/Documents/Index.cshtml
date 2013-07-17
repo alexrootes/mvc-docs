@@ -7,9 +7,9 @@
 }
 
 <div id="list-documents">
-    <span id="product">@Model.DocumentRoot.Product.FormatTitleForDisplay()</span>
-    <span id="language">@Model.DocumentRoot.Language</span>
-    <span id="version">@Model.DocumentRoot.Version.FormatVersionForDisplay()</span>
+    <a href="@Url.Action("IndexLanguages", new { Model.DocumentRoot.Product })">@Model.DocumentRoot.Product.FormatTitleForDisplay()</a>
+    <a href="@Url.Action("IndexVersions", new { Model.DocumentRoot.Product, Model.DocumentRoot.Language })">@Model.DocumentRoot.Language</a>
+    <a href="@Url.Action("Index", new { Model.DocumentRoot.Product, Model.DocumentRoot.Language, Model.DocumentRoot.Version } )">@Model.DocumentRoot.Version.FormatVersionForDisplay()</a>
     <ul>
         @foreach (var file in Model.Documents)
         {
