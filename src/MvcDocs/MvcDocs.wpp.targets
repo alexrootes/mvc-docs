@@ -11,6 +11,7 @@
   <Target Name="AddCustomSkipRules" BeforeTargets="PackageUsingManifest">
     <ItemGroup>
       <MsDeploySkipRules Include="SkipAppDocs">
+        <SkipAction>Delete</SkipAction>
         <ObjectName>dirPath</ObjectName>
         <AbsolutePath>.*\\App_Docs\\.*</AbsolutePath>
       </MsDeploySkipRules>
