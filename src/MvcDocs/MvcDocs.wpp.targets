@@ -8,7 +8,7 @@
 		</ItemGroup>
   </Target>
 
-  <Target Name="AddCustomSkipRules" BeforeTargets="PackageUsingManifest">
+  <!--<Target Name="AddCustomSkipRules" BeforeTargets="PackageUsingManifest">
     <ItemGroup>
       <MsDeploySkipRules Include="SkipAppDocs">
         <SkipAction>Delete</SkipAction>
@@ -16,5 +16,5 @@
         <AbsolutePath>.*\\App_Docs\\.*</AbsolutePath>
       </MsDeploySkipRules>
     </ItemGroup>
-  </Target>
+  </Target>-->
 </Project>
