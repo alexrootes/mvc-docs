@@ -7,6 +7,7 @@
 }
 
 <div id="list-versions">
+    <a href="@Url.Action("IndexProducts", "Documents")">All Products</a>
     <a href="@Url.Action("IndexLanguages", new { Model.Product })">@Model.Product.FormatTitleForDisplay()</a>
     <a href="@Url.Action("IndexVersions", new { Model.Product, Model.Language })">@Model.Language</a>
     <ul>

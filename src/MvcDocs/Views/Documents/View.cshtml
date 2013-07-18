@@ -8,6 +8,7 @@
 <div id="product-logo" class="@(Model.Product)-logo"></div>
 
 <div id="doc-head">
+    <a href="@Url.Action("IndexProducts", "Documents")">All Products</a>
     <a href="@Url.Action("IndexLanguages", new { Model.Product })">@Model.Product.FormatTitleForDisplay()</a>
     <a href="@Url.Action("Index", "Documents", new { ignoreHomeDocuments = true })">Contents</a>
     <div id="language-list">

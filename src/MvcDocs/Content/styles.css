@@ -1,4 +1,7 @@
 ﻿body {
+	border: 0px;
+	padding: 0px;
+	margin: 0px;
     line-height: 1.6;
     color: #333333;
     font: 14px Helvetica, arial, freesans, clean, sans-serif;
@@ -10,6 +13,30 @@ h1 {
 
 p {
     margin: 15px;
+}
+
+div {
+	float: left;
+}
+
+#content {
+	width: 100%;
+}
+
+#header {
+	width: 100%;
+	background-color: #258cc6;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+#top-menu {
+	margin-right: 4px;
+}
+
+#search {
+	float: right;
+	margin-right: 8px;
 }
 
 #search-results .hl {

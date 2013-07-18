@@ -7,6 +7,7 @@
 }
 
 <div id="list-languages">
+    <a href="@Url.Action("IndexProducts", "Documents")">All Products</a>
     <a href="@Url.Action("IndexLanguages", new { Model.Product })">@Model.Product.FormatTitleForDisplay()</a>
     <ul>
         @foreach (var language in Model.Languages)
