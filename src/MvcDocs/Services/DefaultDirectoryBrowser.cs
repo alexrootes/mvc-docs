@@ -8,7 +8,7 @@ namespace MvcDocs.Services
 {
 	public class DefaultDirectoryBrowser : IDirectoryBrowser
 	{
-		private const string DocumentExtension = ".md";
+		private static readonly IList<string> MarkdownExtensions = new[] {"markdown", "mdown", "mkdn", "md", "mkd", "mdwn", "mdtxt", "mdtext", "text"};
 
 		private IApplicationSettings Settings { get; set; }
 
@@ -69,10 +69,8 @@ namespace MvcDocs.Services
 		{
 			var path = Path.Combine(this.Settings.GetRepositoryPath(), root.ToPath());
 
-			return Directory.GetFiles(path, "*" + DocumentExtension)
-				.Select(Path.GetFileName)
-				.Select(f => f.Substring(0, f.LastIndexOf("."))) // strip file extension
-				.ToList();
+			return GetMarkdownFiles(path).Select(Path.GetFileNameWithoutExtension)
+			                             .ToList();
 		}
 
 		public IEnumerable<MarkdownDocument> ListDocuments(DocumentRoot root)
@@ -83,12 +81,10 @@ namespace MvcDocs.Services
 		public MarkdownDocument GetDocument(DocumentRoot root, string name)
 		{
 			var rootPath = GetAbsoluteDocumentRootPath(root);
-			var docPath = Path.Combine(rootPath, name + DocumentExtension);
-
-			if (DocumentExists(root, name) == false)
-			{
+			if (!MarkdownFileExists(rootPath, name))
 				throw new Exception(string.Format("No document with the name {0} could be found. [{1}]", name, rootPath));
-			}
+			
+			var docPath = GetMarkdownFiles(rootPath, name).FirstOrDefault();
 
 			return new MarkdownDocument(root, name, File.ReadAllText(docPath, Encoding.UTF8));
 		}
@@ -96,18 +92,25 @@ namespace MvcDocs.Services
 		public bool DocumentExists(DocumentRoot root, string name)
 		{
 			var rootPath = GetAbsoluteDocumentRootPath(root);
-			var docPath = Path.Combine(rootPath, GetDocumentRootFileName(name));
-			return File.Exists(docPath);
-		}
-
-		private static string GetDocumentRootFileName(string name, string extension = DocumentExtension)
-		{
-			return name.EndsWith(extension) ? name : name + DocumentExtension;
+			return MarkdownFileExists(rootPath, name);
 		}
 
 		private string GetAbsoluteDocumentRootPath(DocumentRoot root)
 		{
 			return Path.Combine(this.Settings.GetRepositoryPath(), root.ToPath());
+		}
+
+		private static IEnumerable<string> GetMarkdownFiles(string directory, string name = "*")
+		{
+			return MarkdownExtensions.SelectMany(ext => Directory.GetFiles(directory, String.Format("{0}.{1}", name, ext)));
+		}
+
+		private static bool MarkdownFileExists(string directory, string name)
+		{
+			return
+				!String.IsNullOrEmpty(
+					MarkdownExtensions.Select(ext => Path.Combine(directory, String.Format("{0}.{1}", name, ext)))
+									  .FirstOrDefault(File.Exists));
 		}
 	}
 }
