@@ -34,10 +34,6 @@
 		<h1>@Html.Raw(Model.Title.FormatTitleForDisplay())</h1>
 	</div>
     <div id="doc-content">
-        <div id="doc-body">
-            <div class="markdown-body">
-                @Html.Raw(@Model.Html)
-            </div>
-        </div>
+          @Html.Raw(@Model.Html)
     </div>
 </div>

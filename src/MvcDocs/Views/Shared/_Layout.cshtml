@@ -8,21 +8,18 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+
     <link href="@Url.Content("~/Content/styles.css")" media="screen" rel="stylesheet" type="text/css" />
+
 </head>
 <body>
-    <div id="content">
-        <div id="header">
-            <div id="search">
+
                 @using (Html.BeginForm("Index", "Search", new { }, FormMethod.Get))
                 {
                     <label for="search-box">Search:</label><input id="search-box" name="term" type="text"/>
                 }
-            </div>
-        </div>
-        <div id="main">
+
             @RenderBody()
-        </div>
-    </div>
+
 </body>
 </html>
