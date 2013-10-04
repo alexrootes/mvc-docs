@@ -47,6 +47,9 @@
     <Reference Include="Lucene.Net">
       <HintPath>..\packages\Lucene.Net.3.0.3\lib\NET40\Lucene.Net.dll</HintPath>
     </Reference>
+    <Reference Include="MarkdownDeep">
+      <HintPath>..\packages\MarkdownDeep.NET.1.5\lib\.NetFramework 3.5\MarkdownDeep.dll</HintPath>
+    </Reference>
     <Reference Include="MarkdownSharp, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
@@ -140,6 +143,7 @@
     <Compile Include="Services\ApplicationSettings.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Services\AdvancedDocumentFormatter.cs" />
     <Compile Include="Services\DefaultDirectoryBrowser.cs">
       <SubType>Code</SubType>
     </Compile>
