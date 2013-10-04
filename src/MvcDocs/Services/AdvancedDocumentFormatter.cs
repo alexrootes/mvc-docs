@@ -11,7 +11,8 @@ namespace MvcDocs.Services
 	{
 		public string ToHtml(MarkdownDocument doc, UrlHelper urlHelper)
 		{
-			var html = new Markdown().Transform(doc.Markdown);
+			var markdown = new Markdown {ExtraMode = true};
+			var html = markdown.Transform(doc.Markdown);
 
 			const string internalLinkPattern = @"\[\[(.+?)\]\]"; // match: [[ any chars ]]
 
