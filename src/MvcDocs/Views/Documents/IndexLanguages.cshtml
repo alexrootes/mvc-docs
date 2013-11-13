@@ -3,16 +3,27 @@
 @model MvcDocs.Models.Documents.IndexLanguagesModel
 
 @{
-    ViewBag.Title = String.Format("Available Languages for {0}", Model.Product);
+	ViewBag.Title = String.Format("Available Languages for {0}", Model.Product);
 }
 
-<div id="list-languages">
-    <a href="@Url.Action("IndexProducts", "Documents")">All Products</a>
-    <a href="@Url.Action("IndexLanguages", new { Model.Product })">@Model.Product.FormatTitleForDisplay()</a>
-    <ul>
-        @foreach (var language in Model.Languages)
-        {
-            <li><a href="@Url.Action("IndexVersions", new { product = Model.Product, language })">@language</a></li>
-        }
-    </ul>
+<div id="doc-head" class="cf">
+	<div id="doc-link-list">
+		<ul>
+			<li><a href="@Url.Action("IndexProducts", "Documents")"><i class="fa fa-home"></i> All Products</a> &gt; <a href="@Url.Action("IndexLanguages", new { Model.Product })">@Model.Product.FormatTitleForDisplay()</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="doc-wrapper">
+	<div id="head">
+		<h1>Languages</h1>
+	</div>
+	<div id="doc-content">
+		<ul>
+			@foreach (var language in Model.Languages)
+			{
+				<li><a href="@Url.Action("IndexVersions", new { product = Model.Product, language })">@language</a></li>
+			}
+		</ul>
+	</div>
 </div>

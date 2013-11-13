@@ -188,7 +188,10 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
-    <Content Include="Content\styles.css" />
+    <Content Include="Content\styles.css">
+      <DependentUpon>styles.less</DependentUpon>
+    </Content>
+    <Content Include="Content\flags.css" />
     <Content Include="Global.asax" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -234,6 +237,10 @@
     <Content Include="Views\Documents\IndexProducts.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\styles.less" />
+    <Content Include="Content\lesshat.less" />
+    <Content Include="Content\gfm.less" />
+    <Content Include="Content\reset.less" />
     <None Include="MvcDocs.wpp.targets" />
   </ItemGroup>
   <PropertyGroup>

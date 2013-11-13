@@ -6,15 +6,24 @@
     ViewBag.Title = String.Format("Contents of {0} - {1} - {2}", Model.DocumentRoot.Product, Model.DocumentRoot.Language, Model.DocumentRoot.Version);
 }
 
-<div id="list-documents">
-    <a href="@Url.Action("IndexProducts", "Documents")">All Products</a>
-    <a href="@Url.Action("IndexLanguages", new { Model.DocumentRoot.Product })">@Model.DocumentRoot.Product.FormatTitleForDisplay()</a>
-    <a href="@Url.Action("IndexVersions", new { Model.DocumentRoot.Product, Model.DocumentRoot.Language })">@Model.DocumentRoot.Language</a>
-    <a href="@Url.Action("Index", new { Model.DocumentRoot.Product, Model.DocumentRoot.Language, Model.DocumentRoot.Version } )">@Model.DocumentRoot.Version.FormatVersionForDisplay()</a>
-    <ul>
-        @foreach (var file in Model.Documents)
-        {
-            <li><a href="@Url.Action("View", new { product = Model.DocumentRoot.Product, language = Model.DocumentRoot.Language, version = Model.DocumentRoot.Version, url = file.ToLower() })">@file.FormatTitleForDisplay()</a></li>
-        }
-    </ul>
+<div id="doc-head" class="cf">
+	<div id="doc-link-list">
+		<ul>
+			<li><a href="@Url.Action("IndexProducts", "Documents")"><i class="fa fa-home"></i> All Products</a> &gt; <a href="@Url.Action("IndexLanguages", new { Model.DocumentRoot.Product })">@Model.DocumentRoot.Product.FormatTitleForDisplay()</a> &gt; <a href="@Url.Action("IndexVersions", new { Model.DocumentRoot.Product, Model.DocumentRoot.Language })">@Model.DocumentRoot.Language</a> &gt; <a href="@Url.Action("Index", new { Model.DocumentRoot.Product, Model.DocumentRoot.Language, Model.DocumentRoot.Version } )">@Model.DocumentRoot.Version.FormatVersionForDisplay()</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="doc-wrapper">
+	<div id="head">
+		<h1>Table of Contents</h1>
+	</div>
+	<div id="doc-content">
+		<ul>
+			@foreach (var file in Model.Documents)
+			{
+				<li><a href="@Url.Action("View", new { product = Model.DocumentRoot.Product, language = Model.DocumentRoot.Language, version = Model.DocumentRoot.Version, url = file.ToLower() })">@file.FormatTitleForDisplay()</a></li>
+			}
+		</ul>
+	</div>
 </div>

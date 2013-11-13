@@ -3,15 +3,27 @@
 @model MvcDocs.Models.Documents.IndexProductsModel
 
 @{
-    ViewBag.Title = "Available Products";
+	ViewBag.Title = "Available Products";
 }
 
-<div id="list-products">
-    <a href="@Url.Action("IndexProducts", "Documents")">All Products</a>
-    <ul>
-        @foreach (var product in Model.Products)
-        {
-            <li><a href="@Url.Action("IndexLanguages", new { product })">@product.FormatTitleForDisplay()</a></li>
-        }
-    </ul>
+<div id="doc-head" class="cf">
+	<div id="doc-link-list">
+		<ul>
+			<li><a href="@Url.Action("IndexProducts", "Documents")"><i class="fa fa-home"></i> All Products</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="doc-wrapper">
+	<div id="head">
+		<h1>Products</h1>
+	</div>
+	<div id="doc-content">
+		<ul>
+			@foreach (var product in Model.Products)
+			{
+				<li><a href="@Url.Action("IndexLanguages", new { product })">@product.FormatTitleForDisplay()</a></li>
+			}
+		</ul>
+	</div>
 </div>

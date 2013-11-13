@@ -3,17 +3,27 @@
 @model MvcDocs.Models.Documents.IndexVersionsModel
 
 @{
-    ViewBag.Title = String.Format("Available Languages for {0} - {1}", Model.Product, Model.Language);
+	ViewBag.Title = String.Format("Available Languages for {0} - {1}", Model.Product, Model.Language);
 }
 
-<div id="list-versions">
-    <a href="@Url.Action("IndexProducts", "Documents")">All Products</a>
-    <a href="@Url.Action("IndexLanguages", new { Model.Product })">@Model.Product.FormatTitleForDisplay()</a>
-    <a href="@Url.Action("IndexVersions", new { Model.Product, Model.Language })">@Model.Language</a>
-    <ul>
-        @foreach (var version in Model.Versions)
-        {
-            <li><a href="@Url.Action("Index", new { product = Model.Product, language = Model.Language, version })">@version.FormatVersionForDisplay()</a></li>
-        }
-    </ul>
+<div id="doc-head" class="cf">
+	<div id="doc-link-list">
+		<ul>
+			<li><a href="@Url.Action("IndexProducts", "Documents")"><i class="fa fa-home"></i> All Products</a> &gt; <a href="@Url.Action("IndexLanguages", new { Model.Product })">@Model.Product.FormatTitleForDisplay()</a> &gt; <a href="@Url.Action("IndexVersions", new { Model.Product, Model.Language })">@Model.Language</a></li>
+		</ul>
+	</div>
+</div>
+
+<div id="doc-wrapper">
+	<div id="head">
+		<h1>Versions</h1>
+	</div>
+	<div id="doc-content">
+		<ul>
+			@foreach (var version in Model.Versions)
+			{
+				<li><a href="@Url.Action("Index", new { product = Model.Product, language = Model.Language, version })">@version.FormatVersionForDisplay()</a></li>
+			}
+		</ul>
+	</div>
 </div>

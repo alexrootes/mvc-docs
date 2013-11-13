@@ -2,38 +2,45 @@
 @model MvcDocs.Models.Documents.ViewModel
 
 @{
-    ViewBag.Title = String.Format("{1} - {0}", Model.Product.FormatTitleForDisplay(), Model.Title);
+	ViewBag.Title = String.Format("{1} - {0}", Model.Product.FormatTitleForDisplay(), Model.Title);
 }
 
 <div id="product-logo" class="@(Model.Product)-logo"></div>
 
-<div id="doc-head">
-    <a href="@Url.Action("IndexProducts", "Documents")">All Products</a>
-    <a href="@Url.Action("IndexLanguages", new { Model.Product })">@Model.Product.FormatTitleForDisplay()</a>
-    <a href="@Url.Action("Index", "Documents", new { ignoreHomeDocuments = true })">Contents</a>
-    <div id="language-list">
-        <ul>
-            @foreach (var language in Model.Languages)
-            {
-                <li><a href="@Url.Action("View", "Documents", new { product = Model.Product, language = language, version = Model.Version, url = Model.Url })">@language</a></li>
-            }
-        </ul>
-    </div>
-    <div id="version-list">
-        <ul>
-            @foreach (var version in Model.Versions)
-            {
-                <li><a href="@Url.Action("View", "Documents", new { product = Model.Product, language = Model.Language, version = version, url = Model.Url })">@version.FormatVersionForDisplay()</a></li>
-            }
-        </ul>
-    </div>
+<div id="doc-head" class="cf">
+	<div id="version-list" class="drop-down-menu">
+		<a href="#" class="drop-down-toggle">File Version <i class="fa fa-caret-down"></i></a>
+		<ul class="drop-down-list">
+			@foreach (var version in Model.Versions)
+			{
+				<li><a href="@Url.Action("View", "Documents", new { product = Model.Product, language = Model.Language, version = version, url = Model.Url })">@version.FormatVersionForDisplay()</a></li>
+			}
+		</ul>
+	</div>
+
+	<div id="language-list" class="drop-down-menu">
+		<a href="#" class="drop-down-toggle">Language <i class="fa fa-caret-down"></i></a>
+		<ul class="drop-down-list">
+			@foreach (var language in Model.Languages)
+			{
+				<li><a href="@Url.Action("View", "Documents", new { product = Model.Product, language = language, version = Model.Version, url = Model.Url })"><span class="flag-icon flag-icon-@language"></span> @language</a></li>
+			}
+		</ul>
+	</div>
+
+	<div id="doc-link-list">
+		<ul>
+			<li><a href="@Url.Action("IndexProducts", "Documents")"><i class="fa fa-home"></i> All Products</a> &gt; <a href="@Url.Action("IndexLanguages", new { Model.Product })">@Model.Product.FormatTitleForDisplay()</a></li>
+			<li><a href="@Url.Action("Index", "Documents", new { ignoreHomeDocuments = true })">Table of Contents</a></li>
+		</ul>
+	</div>
 </div>
 
 <div id="doc-wrapper">
 	<div id="head">
 		<h1>@Html.Raw(Model.Title.FormatTitleForDisplay())</h1>
 	</div>
-    <div id="doc-content">
-          @Html.Raw(@Model.Html)
-    </div>
+	<div id="doc-content">
+		@Html.Raw(@Model.Html)
+	</div>
 </div>
