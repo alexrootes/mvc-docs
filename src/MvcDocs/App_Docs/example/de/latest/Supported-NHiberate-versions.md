@@ -1,0 +1,3 @@
+**What version is Fluent NHibernate designed for?** The only officially supported version of NHibernate will always be the latest GA release. At the time of writing that's NHibernate 2.1GA, and we are currently distributing that version with Fluent NHibernate. We do maintain a 2.0.1GA branch for the time being, but no binaries are built from it; you will need to build this yourself.
+
+**What about NHibernate trunk?** We don't officially support working from NHibernate trunk, but as long as there aren't any breaking changes to code we rely on, there shouldn't be any reason why you can't build it yourself. Quite a few people do this.
