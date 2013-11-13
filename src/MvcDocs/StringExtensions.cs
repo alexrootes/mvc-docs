@@ -49,7 +49,7 @@ namespace MvcDocs
 
 			var textInfo = CultureInfo.CurrentCulture.TextInfo;
 
-			return textInfo.ToTitleCase(source).Replace("-", " ");
+			return textInfo.ToTitleCase(source).Replace("-", " ").Replace("_", " ");
 		}
 
 		public static string FormatVersionForDisplay(this string source)
