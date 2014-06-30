@@ -29,6 +29,8 @@ namespace MvcDocs
 
 			// start an async build of our search indexes
 			Bootstrapper.Kernel.Get<ISearchIndexer>().IndexAsync();
+
+            MvcHandler.DisableMvcResponseHeader = true;
 		}
 	}
 }
